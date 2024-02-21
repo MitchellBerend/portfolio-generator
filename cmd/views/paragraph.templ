@@ -1,0 +1,17 @@
+package views
+
+import "portfolio-generator/cmd/structures"
+
+templ Paragraph(par structures.Paragraph) {
+	<li class="mb-2">
+		if par.Type == "link" {
+			<a
+				href={ templ.URL(par.Link) }
+				class="text-blue-600 hover:underline"
+			><strong>{ par.Title }</strong></a>
+		} else {
+			<strong>{ par.Title }</strong>
+		}
+		{ par.Content }
+	</li>
+}

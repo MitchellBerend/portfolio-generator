@@ -1,0 +1,40 @@
+package views
+
+import "portfolio-generator/cmd/structures"
+
+templ Page(file structures.File) {
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>{ file.Title }</title>
+		for _, script := range file.Scripts {
+			<script src={ script }></script>
+		}
+	</head>
+	<body>
+		<main>
+			<div class="bg-gray-100 min-h-screen flex">
+				<div class="container mx-auto px-4 py-8 flex-1">
+					<div class="max-w-2xl mx-auto">
+						<h3 class="text-3xl font-bold mb-4">{ file.Header.Title }</h3>
+						<p class="text-lg mb-6">{ file.Header.Content }</p>
+						<div class="mb-8">
+							@Chapters(file.Body)
+						</div>
+						<div>
+							<h2 class="text-2xl font-bold mb-2">{ file.Footer.Title }</h2>
+							<div class="flex
+							flex-wrap
+							gap-2">@templ.Raw(file.Footer.Content)</div>
+						</div>
+					</div>
+				</div>
+				<div class="p-4 flex-none fixed top-0 right-0">
+					@SidePanel(file.SidePanel)
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
+}

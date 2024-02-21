@@ -1,0 +1,19 @@
+package views
+
+import "portfolio-generator/cmd/structures"
+import "fmt"
+
+templ SidePanel(panels []structures.SidePanelElement) {
+	<ul>
+		for idx, panel := range panels {
+			<li>
+				<a href={ templ.URL(panel.Link) }>
+					<img
+						src={ panel.Image }
+						alt={ fmt.Sprintf("placeholder %d", idx) }
+					/>
+				</a>
+			</li>
+		}
+	</ul>
+}
