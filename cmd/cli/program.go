@@ -43,7 +43,8 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(generateCommand)
-
 	generateCommand.Flags().StringP("input", "i", ".", "File or dir that contains json files")
 	generateCommand.Flags().StringP("output", "o", ".", "Location of output target")
+
+	rootCmd.AddCommand(newCommand)
 }
