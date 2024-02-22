@@ -10,6 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// This command generates a new json config file for convenience
 var newCommand = &cobra.Command{
 	Use:   "new",
 	Short: "Generates a json file with dummy data",
@@ -19,14 +20,19 @@ var newCommand = &cobra.Command{
 		if err != nil {
 			log.Fatalf("Could not open new.json: %e", err)
 		}
+		// close file on function return
 		defer file.Close()
 
+		// generate new config file struct
 		dummyData := structures.CreateExampleFile()
+
+		// marshal struct to json
 		jsonData, err := json.MarshalIndent(dummyData, "", "    ")
 		if err != nil {
 			log.Fatalf("Error marshaling JSON: %e", err)
 		}
 
+		// write json data to file
 		_, err = file.Write(jsonData)
 		if err != nil {
 			log.Fatalf("Could not write to new.json: %e", err)
