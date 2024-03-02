@@ -3,7 +3,7 @@ package views
 import "portfolio-generator/cmd/structures"
 
 templ Paragraph(par structures.Paragraph) {
-	<li class="mb-2">
+	<p class="mb-2">
 		if par.Type == "link" {
 			<a
 				href={ templ.URL(par.Link) }
@@ -13,5 +13,5 @@ templ Paragraph(par structures.Paragraph) {
 			<strong>{ par.Title }</strong>
 		}
 		{ par.Content }
-	</li>
+	</p>
 }

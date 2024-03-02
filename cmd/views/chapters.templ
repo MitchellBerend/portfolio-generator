@@ -5,10 +5,10 @@ import "portfolio-generator/cmd/structures"
 templ Chapters(chapters []structures.Chapter) {
 	for _, chapter := range chapters{
 		<h2 class="text-2xl font-bold mb-2">{ chapter.Title }</h2>
-		<ul class="list-disc pl-6">
+		<div class="mb-8">
 			for _, paragraph := range chapter.Content {
 				@Paragraph(paragraph)
 			}
-		</ul>
+		</div>
 	}
 }
