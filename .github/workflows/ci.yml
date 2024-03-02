@@ -4,6 +4,8 @@ on:
   push:
     tags-ignore:
       - 'v*.*.*'
+    branch:
+      - "*"
   pull_request:
 
 jobs:
@@ -33,10 +35,16 @@ jobs:
         continue-on-error: true
         run: go mod graph
 
+      - name: Install templ
+        run: go install github.com/a-h/templ/cmd/templ@latest
+
       - name: Install dependencies
         run: |
           go mod tidy
           go mod download
+
+      - name: generate templ
+        run: templ generate
 
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v3.7.0
