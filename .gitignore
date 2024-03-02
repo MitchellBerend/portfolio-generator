@@ -1,3 +1,4 @@
 /target
 
 dist/
+cmd/views/*_templ.go
