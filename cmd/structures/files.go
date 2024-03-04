@@ -15,12 +15,20 @@ func CreateExampleFile() File {
 		FileName: "example.txt",
 		Title:    "Example Title",
 		Scripts:  []string{"script1.js", "script2.js"},
-		Header:   Paragraph{Title: "Header", Content: "This is the header."},
+		Header: Paragraph{
+			Type:    "link|normal",
+			Link:    "https://www.example.com",
+			Title:   "Header",
+			Content: "This is the header.",
+		},
 		Body: []Chapter{
 			{
 				Title: "Chapter 1",
 				Content: []Paragraph{
 					{
+
+						Type:    "link|normal",
+						Link:    "https://www.example.com",
 						Title:   "Intro",
 						Content: "Introduction paragraph.",
 					},
@@ -30,17 +38,26 @@ func CreateExampleFile() File {
 				Title: "Chapter 2",
 				Content: []Paragraph{
 					{
+						Type:    "link|normal",
+						Link:    "https://www.example.com",
 						Title:   "Section 1",
 						Content: "Section 1 content.",
 					},
 					{
+						Type:    "link|normal",
+						Link:    "https://www.example.com",
 						Title:   "Section 2",
 						Content: "Section 2 content.",
 					},
 				},
 			},
 		},
-		Footer: Paragraph{Title: "Footer", Content: "This is the footer."},
+		Footer: Paragraph{
+			Title:   "Footer",
+			Type:    "link|normal",
+			Link:    "https://www.example.com",
+			Content: "This is the footer.",
+		},
 		SidePanel: []SidePanelElement{
 			{
 				Link:  "www.google.com",
