@@ -36,7 +36,8 @@ jobs:
         run: go mod graph
 
       - name: Install templ
-        run: go install github.com/a-h/templ/cmd/templ@latest
+        run: |
+          go install github.com/a-h/templ/cmd/templ@latest
 
       - name: Install dependencies
         run: |
@@ -44,12 +45,17 @@ jobs:
           go mod download
 
       - name: generate templ
-        run: templ generate
+        run: templ generate -v
 
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v3.7.0
+        with:
+          version: v1.54.2
 
       - name: Run tests
         run: |
           go test ./...
 
+      - name: Run build
+        run: |
+          go build
