@@ -43,13 +43,11 @@ jobs:
           go mod tidy
           go mod download
 
-        # Make sure linting is done before generating the Templ files since
-        # those will not pass linting
-      - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v3.7.0
-
       - name: generate templ
         run: templ generate
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v3.7.0
 
       - name: Run tests
         run: |
