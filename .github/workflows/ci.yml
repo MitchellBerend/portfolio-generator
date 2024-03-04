@@ -36,7 +36,9 @@ jobs:
         run: go mod graph
 
       - name: Install templ
-        run: go install github.com/a-h/templ/cmd/templ@latest
+        run: |
+          go install github.com/a-h/templ/cmd/templ@latest
+          go get github.com/a-h/templ
 
       - name: Install dependencies
         run: |
