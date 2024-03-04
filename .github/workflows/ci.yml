@@ -11,52 +11,50 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    steps: - uses: actions/checkout@v4
 
-      - name: Set up Go
+      - name: set up go
         uses: actions/setup-go@v4
         with:
           go-version: '1.22.0'
 
-      - name: Deps cache
+      - name: deps cache
         id: cache-go-deps
         uses: actions/cache@v3
         env:
           cache-name: go-deps-cache
         with:
           path: ~/godeps
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/go.sum') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashfiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
 
       - if: ${{ steps.cache-go-deps.outputs.cache-hit != 'true' }}
-        name: List the state of go modules
+        name: list the state of go modules
         continue-on-error: true
         run: go mod graph
 
-      - name: Install templ
+      - name: install templ
         run: |
           go install github.com/a-h/templ/cmd/templ@latest
-          go get github.com/a-h/templ
 
-      - name: Install dependencies
+      - name: install dependencies
         run: |
           go mod tidy
           go mod download
 
       - name: generate templ
-        run: templ generate
+        run: templ generate -v
 
-      - name: Run golangci-lint
+      - name: run golangci-lint
         uses: golangci/golangci-lint-action@v3.7.0
         with:
           version: v1.54.2
 
-      - name: Run tests
+      - name: run tests
         run: |
           go test ./...
 
-      - name: Run build
+      - name: run build
         run: |
           go build
