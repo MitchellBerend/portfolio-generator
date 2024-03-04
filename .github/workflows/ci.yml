@@ -48,7 +48,7 @@ jobs:
         run: templ generate -v
 
       - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v3.7.0
+        uses: golangci/golangci-lint-action@v4
         with:
           version: v1.54.2
 
